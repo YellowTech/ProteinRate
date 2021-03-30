@@ -3,6 +3,8 @@ Simple Django webpage featuring short reviews of protein shakes
 
 Visit live production page at https://protein.yellowtech.ch/
 
+I will add a SQL dump of my reviews as soon as I've collected a few.
+
 # Start your own page using Docker:
 (can also run using the django development server)
 
