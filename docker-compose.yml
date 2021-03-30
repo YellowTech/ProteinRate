@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+  web:
+    build: ./app
+    command: gunicorn ProteinRate.wsgi:application --bind 0.0.0.0:8000
+    restart: always
+    volumes:
+      - .:/code:ro
+      - ./db.sqlite3:/code/db.sqlite3
+      -
+# secure this behind a reverse proxy
+#    ports:
+#      - "8000:8000"
+

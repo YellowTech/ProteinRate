@@ -1,0 +1,50 @@
+{% extends 'protein/base.html' %}
+
+{% load bootstrap4 %}
+
+{% block title %}
+    All Shakes
+{% endblock %}
+
+{% block tablejs %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'protein/style.css' %}">
+    <script src="{% static 'protein/tables.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    {% if searched %}
+        <br>
+        <h1>Search results for "{{ search }}"</h1>
+    {% endif %}
+    <div class="container">
+    <br>
+        {% if shakes %}
+            <table class="table table-striped sortable">
+                <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Personal Opinion</th>
+                    <th scope="col">Protein / 100g</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for shake in shakes %}
+
+                    <tr>
+                        <td><a href="{% url 'protein:shake' shake.name %}">{{ shake.name }}</a></td>
+                        <td>{{ shake.opinion }}</td>
+                        <td>{{ shake.proteinPercentage }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No results</p>
+        {% endif %}
+    </div>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends 'protein/base.html' %}
+
+{% load bootstrap4 %}
+
+{% block title %}
+    {{ shake.name }}
+{% endblock %}
+
+{% block chartjs %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.css" integrity="sha512-/zs32ZEJh+/EO2N1b0PEdoA10JkdC3zJ8L5FTiQu82LR9S/rOQNfQN7U59U9BC12swNeRAz3HSzIL2vpp4fv3w==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
+{% endblock %}
+
+{% block content %}
+    <br>
+    <h1 class="display-4 text-center html">{{ shake.name }}</h1>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h3>{{ shake.proteinPercentage }}g Protein / 100g</h3>
+
+                <p>{{ shake.review }}</p>
+                <br>
+
+                <h2>Personal Score {{ shake.opinion }}/10</h2>
+                <a href="{{ shake.url }}">Product Page</a>
+            </div>
+            <div class="col">
+                <canvas id="myChart{{ shake.id }}" height="250%"></canvas>
+                <script>
+                    Chart.defaults.global.animation.duration = 2000;
+                    var ctx = document.getElementById('myChart{{ shake.id }}');
+                    'use strict';
+                    var myChart = new Chart(ctx, {
+                      "type" : "radar",
+                      "data" : {
+                        "labels" : ["Creaminess", "Artificiality", "Solubility", "Smell", "Taste", "Sweetness"],
+                        "datasets" : [{
+                          "data" : [{{ shake.creaminess }}, {{ shake.artificiality }}, {{ shake.solubility }}, {{ shake.smell }}, {{ shake.taste }}, {{ shake.sweetness }}],
+                          "fill" : true,
+                          "backgroundColor" : "rgba(55,113,174, 0.2)",
+                          "borderColor" : "rgb(99,187,255)",
+                          "pointBackgroundColor" : "rgb(99,182,255)",
+                          "pointBorderColor" : "#323232",
+                          "pointHoverBackgroundColor" : "#fff",
+                          "pointHoverBorderColor" : "rgb(99,169,255)"
+                        }]
+                      },
+                      "options": {
+                        "scale": {
+                            "angleLines": {
+                                "display": false
+                            },
+                            "ticks": {
+                                "suggestedMin": 0,
+                                "suggestedMax": 10
+                            }
+                        },
+                        "legend": {
+                          "display": false
+                        }
+                      }
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
