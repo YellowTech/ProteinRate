@@ -8,7 +8,7 @@ services:
     volumes:
       - .:/code:ro
       - ./db.sqlite3:/code/db.sqlite3
-      -
+
 # secure this behind a reverse proxy
     ports:
       - "8000:8000"
